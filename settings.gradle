@@ -1,4 +1,1 @@
-rootProject.name = 'aarrieche-toy-project'
-
-include 'ms-user'
-include 'ms-chamado'
+rootProject.name = 'demo'

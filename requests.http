@@ -1,101 +1,23 @@
-### Health Checks
 
-# Verificar status do ms-user
-GET http://localhost:8080/health
+### Get all users
+
+GET /api/v1/users HTTP/1.1
+Host: localhost:8080
 Accept: application/json
 
-# Verificar status do ms-chamado
-GET http://localhost:8081/health
-Accept: application/json
+### Create a new User
 
-### ms-user - Gerenciamento de Usuários
-
-# Listar todos os usuários
-GET http://localhost:8080/api/v1/users
-Accept: application/json
-
-# Criar um novo usuário
-POST http://localhost:8080/api/v1/users
+POST /api/v1/users HTTP/1.1
+Host: localhost:8080
 Content-Type: application/json
 
 {
-    "email": "joao.silva@empresa.com",
-    "password": "senha123456",
-    "handle": "joao.silva",
-    "name": "João Silva",
+    "email": "batata@potato.com",
+    "password": "1234RT56",
+    "handle": "papas",
+    "name": "Kartofel",
     "roles": [
         "ROLE_USER"
     ],
-    "company": "Empresa ABC Ltda"
+    "company": "potato inc"
 }
-
-# Criar usuário com múltiplos papéis
-POST http://localhost:8080/api/v1/users
-Content-Type: application/json
-
-{
-    "email": "admin@empresa.com",
-    "password": "admin123456",
-    "handle": "admin",
-    "name": "Administrador",
-    "roles": [
-        "ROLE_USER",
-        "ROLE_ADMIN"
-    ],
-    "company": "Empresa ABC Ltda"
-}
-
-# Tentar criar usuário com email inválido
-POST http://localhost:8080/api/v1/users
-Content-Type: application/json
-
-{
-    "email": "email-invalido",
-    "password": "senha123456",
-    "handle": "usuario-teste",
-    "name": "Usuário Teste",
-    "roles": [
-        "ROLE_USER"
-    ],
-    "company": "Empresa Teste"
-}
-
-### ms-chamado - Gerenciamento de Chamados
-
-# Listar todos os chamados
-GET http://localhost:8081/api/v1/chamados
-Accept: application/json
-
-# Buscar chamado por ID
-GET http://localhost:8081/api/v1/chamados/1
-Accept: application/json
-
-# Criar chamado manualmente
-POST http://localhost:8081/api/v1/chamados
-Content-Type: application/json
-
-{
-    "acao": "CRIAR",
-    "objeto": "SISTEMA",
-    "detalhamento": "Configurar novo sistema de backup",
-    "tipoSituacao": "NOVO",
-    "criadoPor": "admin"
-}
-
-# Atualizar situação de um chamado
-PATCH http://localhost:8081/api/v1/chamados/1/situacao
-Content-Type: text/plain
-
-ANDAMENTO
-
-# Atualizar situação para resolvido
-PATCH http://localhost:8081/api/v1/chamados/1/situacao
-Content-Type: text/plain
-
-RESOLVIDO
-
-# Tentar atualizar com situação inválida
-PATCH http://localhost:8081/api/v1/chamados/1/situacao
-Content-Type: text/plain
-
-SITUACAO_INVALIDA
